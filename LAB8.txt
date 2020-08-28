@@ -1,0 +1,88 @@
+CREATE TABLE CUSTOMERS
+(
+    ID INT PRIMARY KEY,
+    NAME VARCHAR(15),
+    AGE INT,
+    ADDRESS VARCHAR(15),
+    SALARY DECIMAL(6,2)
+)
+
+DROP TABLE CUSTOMERS
+
+INSERT INTO
+CUSTOMERS
+VALUES(1,'Ramesh',32,'Ahmedabad',2500.00)
+
+
+INSERT INTO
+CUSTOMERS
+VALUES(2,'Khilan',25,'Delhi',2000.00)
+
+INSERT INTO
+CUSTOMERS
+VALUES(3,'kaushik',23,'Kota',2500.00)
+
+INSERT INTO
+CUSTOMERS
+VALUES(4,'Chaitali',25,'Mumbai',7000.00)
+
+INSERT INTO
+CUSTOMERS
+VALUES(5,'Hardik',27,'Bhopal',9000.00)
+
+INSERT INTO
+CUSTOMERS
+VALUES(6,'Komal',22,'Rajshahi',5000.00)
+
+INSERT INTO
+CUSTOMERS
+VALUES(7,'Munir',22,'Chapai',5000.50)
+
+
+SELECT *
+FROM CUSTOMERS
+
+
+
+DECLARE 
+   c_id CUSTOMERS.ID%type; 
+   c_name CUSTOMERS.NAME%type; 
+   c_addr customers.ADDRESS%type; 
+   CURSOR c_customers is 
+      SELECT ID, NAME, ADDRESS FROM customers; 
+
+
+BEGIN 
+   OPEN c_customers; 
+   LOOP 
+   FETCH c_customers into c_id, c_name, c_addr; 
+      EXIT WHEN c_customers%notfound; 
+      dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_addr); 
+   END LOOP; 
+   CLOSE c_customers; 
+END; 
+/
+
+
+DECLARE 
+   c_id CUSTOMERS.ID%type; 
+   c_name CUSTOMERS.NAME%type; 
+   c_addr customers.ADDRESS%type; 
+   CURSOR c_customers is 
+      SELECT ID, NAME, ADDRESS FROM customers; 
+   counter int;
+
+BEGIN 
+   counter := 0;
+   OPEN c_customers; 
+   LOOP 
+   FETCH c_customers into c_id, c_name, c_addr; 
+   
+      EXIT WHEN counter > 4; 
+      dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_addr); 
+
+      counter := counter+1;
+   END LOOP; 
+   CLOSE c_customers; 
+END; 
+/
